@@ -1,0 +1,74 @@
+﻿<UserControl x:Class="Hs.ProcgameDmdConvert.ConvertView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             mc:Ignorable="d" MaxWidth="580" Width="580">
+    <Grid Width="580">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100" />
+            <ColumnDefinition Width="300" />
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="60" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <i:Interaction.Triggers>
+            <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
+                <prism:PopupWindowAction IsModal="True" CenterOverAssociatedObject="True"/>
+            </prism:InteractionRequestTrigger>
+        </i:Interaction.Triggers>
+
+        <GroupBox Grid.Column="0" Grid.ColumnSpan="4" Header="Image Selection" Margin="5,5,-69,5">
+            <Grid Width="580">
+                <StackPanel Width="580">
+                    <DockPanel Margin="0,5">
+                        <Label Content="Image source" Margin="5,0" Width="80"/>
+                        <TextBox Text="{Binding ImageSourcePath}" Margin="10,0" Width="300" />
+                        <Button Content="." Command="{Binding PickImageCommand}" Width="22" HorizontalAlignment="Left"/>
+                        <Controls:NumericUpDown Width="40" Margin="15,0" Value="{Binding ImageDigits}"  Minimum="1" HorizontalAlignment="Left"
+                                                ToolTip="Amount of digits in filename."/>
+                    </DockPanel>
+                    <DockPanel  Margin="0,5">
+                        <Label Content="Dest Path" Margin="5,0" Width="80"/>
+                        <TextBox Text="{Binding ImageDestinationPath}" Margin="10,0" Width="300"/>
+                        <Button Content="." Command="{Binding DestinationPicker}" Margin="0,0" HorizontalAlignment="Left" Width="22"/>
+                        <CheckBox Content="Source" Grid.Column="3" Margin="15,0" IsChecked="{Binding IsSavingToSource}" ToolTip="Create dmd at source folder." Width="100" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                    <DockPanel  Margin="0,5" >
+                        <Label Content="Filename" Margin="5,0" Width="80"/>
+                        <TextBox Text="{Binding DmdFileName}" Margin="10,0" Width="300" HorizontalAlignment="Left"/>
+                    </DockPanel>
+                </StackPanel>
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Convert" Grid.Row="1" Grid.ColumnSpan="4" Margin="5,5,-69,5">
+            <Grid>
+                <DockPanel Grid.Column="1" Grid.Row="2" Margin="5">
+                    <CheckBox Content="Play after conversion" IsChecked="{Binding PlayAfterConversion}"  HorizontalAlignment="Right" Margin="5,0"/>
+                    <!--Normal Convert Button-->
+                    <Button Content="Convert" Command="{Binding ConvertDmdCommand}"
+                        Controls:ButtonHelper.CornerRadius="22"
+                        Style="{DynamicResource AccentedSquareButtonStyle}"
+                        Margin="30,0" Width="70" Controls:ButtonHelper.PreserveTextCase="True">
+                    </Button>
+                    <TextBlock Text="Image Count: " Grid.ColumnSpan="4" Margin="0,5"></TextBlock>
+                    <TextBlock Text="{Binding ImageCount}" Grid.ColumnSpan="4" Margin="0,5"></TextBlock>
+                    <!--<Button Content="Convert" Command="{Binding Notification}" Margin="30,0" Width="70"/>-->
+                </DockPanel>
+            </Grid>
+        </GroupBox>
+    </Grid>
+
+</UserControl>

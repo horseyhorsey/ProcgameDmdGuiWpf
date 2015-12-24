@@ -1,0 +1,40 @@
+﻿<Controls:MetroWindow x:Class="Hs.ProcgameDmdGui.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:local="clr-namespace:Hs.ProcgameDmdGui"
+        mc:Ignorable="d"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="Procgame Dmd Gui" Height="750" MinWidth="600" MaxWidth="600">
+        
+
+    <Grid  Margin="5" Width="580" HorizontalAlignment="Left">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="345*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TabControl  Grid.Column="0"  Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0,0,0,10" Grid.RowSpan="2">
+            <TabItem Header="Convert" >
+                <ItemsControl prism:RegionManager.RegionName="ConvertRegion" Width="580" HorizontalAlignment="Left" />
+            </TabItem>
+            <TabItem Header="Play">
+                <ItemsControl prism:RegionManager.RegionName="PlayerRegion" Margin="10" />
+            </TabItem>
+            <TabItem Header="Settings">
+                <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left">
+                    <Label Content="Procgame.exe" Height="30" HorizontalAlignment="Left"/>
+                    <TextBox Text="{Binding ProcgameExe}" Height="30" HorizontalAlignment="Left" Width="303"/>
+                    <Button Content="." Margin="5,0" Width="22" HorizontalAlignment="Left" Command="{Binding dg}"/>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Controls:MetroWindow>
