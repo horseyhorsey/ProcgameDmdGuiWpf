@@ -196,10 +196,11 @@ namespace Hs.ProcgameDmdConvert
                 //Remove digits for new dmd filename
                 text = Regex.Replace(text, @"(/*[0-9].*)", "");
                 DmdFileName = text;
+
+                var imageExtension = Path.GetExtension(ImageSourcePath);
+                CountImagesToBeConverted(imageExtension);
             }
 
-            var imageExtension = Path.GetExtension(ImageSourcePath);
-            CountImagesToBeConverted(imageExtension);
         }
 
         private Size GetImageSize(string inputImage)
